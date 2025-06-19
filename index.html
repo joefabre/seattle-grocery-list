@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seattle Weekly Grocery List - Accessible Interactive Shopping Planner</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container" role="main">
+        <header class="header" role="banner">
+            <h1 id="main-heading">🛒 Seattle Weekly Grocery List</h1>
+            <p>Plan your weekly shopping with interactive lists and price tracking</p>
+        </header>
+
+        <nav class="controls" role="navigation" aria-label="Grocery list controls">
+            <div class="week-selector" role="tablist" aria-label="Select week">
+                <button class="week-btn active" onclick="showWeek(1)" role="tab" aria-selected="true" aria-controls="week1" id="tab-week1">Week 1</button>
+                <button class="week-btn" onclick="showWeek(2)" role="tab" aria-selected="false" aria-controls="week2" id="tab-week2">Week 2</button>
+                <button class="week-btn" onclick="showWeek(3)" role="tab" aria-selected="false" aria-controls="week3" id="tab-week3">Week 3</button>
+                <button class="week-btn" onclick="showWeek(4)" role="tab" aria-selected="false" aria-controls="week4" id="tab-week4">Week 4</button>
+            </div>
+            <button class="print-btn" onclick="printSelectedItems()" aria-label="Print selected grocery items">
+                🖨️ Print Selected Items
+            </button>
+            <button class="edit-prices-btn" onclick="toggleEditMode()" id="editBtn" aria-label="Toggle price editing mode">
+                ✏️ Edit Prices
+            </button>
+            <div class="total-display" role="status" aria-live="polite">
+                <span>Weekly Budget: <span id="weeklyBudget" aria-label="Weekly budget amount">$96.49</span></span>
+                <span class="selected-total">Selected: <span id="selectedTotal" aria-label="Selected items total">$0.00</span></span>
+            </div>
+        </nav>
+
+        <!-- Week 1 -->
+        <main class="week-content active" id="week1" role="tabpanel" aria-labelledby="tab-week1">
+            <h2 class="week-title">Week 1</h2>
+            <div class="grocery-grid" role="region" aria-label="Grocery categories">
+                <section class="category" role="group" aria-labelledby="proteins-heading">
+                    <h3 id="proteins-heading">🥩 Proteins</h3>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="21.60">
+                        <span class="item-name">Chicken breasts - 3 lbs</span>
+                        <span class="item-price">$21.60</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="21.60" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="13.97">
+                        <span class="item-name">Ground beef - 1.5 lbs</span>
+                        <span class="item-price">$13.97</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="13.97" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="6.74">
+                        <span class="item-name">Eggs - 1 dozen</span>
+                        <span class="item-price">$6.74</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="6.74" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="2.00">
+                        <span class="item-name">Canned tuna - 2 cans</span>
+                        <span class="item-price">$2.00</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="2.00" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="1.50">
+                        <span class="item-name">Peanut butter - small portion</span>
+                        <span class="item-price">$1.50</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="1.50" onchange="updatePrice(this)">
+                    </div>
+                </section>
+
+                <section class="category" role="group" aria-labelledby="vegetables-heading">
+                    <h3 id="vegetables-heading">🥬 Vegetables & Fruits</h3>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="3.00">
+                        <span class="item-name">Bell peppers - 1-2</span>
+                        <span class="item-price">$3.00</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="3.00" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="3.00">
+                        <span class="item-name">Spinach/Lettuce - 1 bag</span>
+                        <span class="item-price">$3.00</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="3.00" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="1.27">
+                        <span class="item-name">Bananas - 5</span>
+                        <span class="item-price">$1.27</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="1.27" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="2.08">
+                        <span class="item-name">Apples - 3</span>
+                        <span class="item-price">$2.08</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="2.08" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="1.23">
+                        <span class="item-name">Oranges - 2-3</span>
+                        <span class="item-price">$1.23</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="1.23" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="2.00">
+                        <span class="item-name">Frozen berries - 0.5 lb</span>
+                        <span class="item-price">$2.00</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="2.00" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="1.50">
+                        <span class="item-name">Broccoli - 0.75 lb</span>
+                        <span class="item-price">$1.50</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="1.50" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="0.90">
+                        <span class="item-name">Carrots - 0.75 lb</span>
+                        <span class="item-price">$0.90</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="0.90" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="3.53">
+                        <span class="item-name">Potatoes - 2.5 lbs</span>
+                        <span class="item-price">$3.53</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="3.53" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="2.16">
+                        <span class="item-name">Onions - 1.25 lbs</span>
+                        <span class="item-price">$2.16</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="2.16" onchange="updatePrice(this)">
+                    </div>
+                </section>
+
+                <section class="category" role="group" aria-labelledby="dairy-heading">
+                    <h3 id="dairy-heading">🥛 Dairy & Pantry</h3>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="1.00">
+                        <span class="item-name">Butter - 0.5 stick</span>
+                        <span class="item-price">$1.00</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="1.00" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="4.48">
+                        <span class="item-name">Bread - 1 loaf</span>
+                        <span class="item-price">$4.48</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="4.48" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="1.50">
+                        <span class="item-name">Tortillas - 0.5 pack</span>
+                        <span class="item-price">$1.50</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="1.50" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="1.20">
+                        <span class="item-name">Pasta - 1 lb</span>
+                        <span class="item-price">$1.20</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="1.20" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="3.00">
+                        <span class="item-name">Rice - 1.25 lbs</span>
+                        <span class="item-price">$3.00</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="3.00" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="1.00">
+                        <span class="item-name">Oatmeal - 0.5 lb</span>
+                        <span class="item-price">$1.00</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="1.00" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="5.65">
+                        <span class="item-name">Shredded cheese - 0.5 lb</span>
+                        <span class="item-price">$5.65</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="5.65" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="2.25">
+                        <span class="item-name">Yogurt - 3 servings</span>
+                        <span class="item-price">$2.25</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="2.25" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="2.00">
+                        <span class="item-name">Oil, seasonings, sauces - portioned</span>
+                        <span class="item-price">$2.00</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="2.00" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="3.00">
+                        <span class="item-name">Canned tomatoes - 1-2</span>
+                        <span class="item-price">$3.00</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="3.00" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="1.00">
+                        <span class="item-name">Bouillon - few cubes</span>
+                        <span class="item-price">$1.00</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="1.00" onchange="updatePrice(this)">
+                    </div>
+                </section>
+
+                <section class="category beverages-category" role="group" aria-labelledby="beverages-heading">
+                    <h3 id="beverages-heading">🥤 Beverages</h3>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="2.50">
+                        <span class="item-name">Juice - 1 bottle</span>
+                        <span class="item-price">$2.50</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="2.50" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="1.00">
+                        <span class="item-name">Water - 1 gallon</span>
+                        <span class="item-price">$1.00</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="1.00" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="3.99">
+                        <span class="item-name">Soda - 12 pack</span>
+                        <span class="item-price">$3.99</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="3.99" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="3.93">
+                        <span class="item-name">Milk - 1 gallon</span>
+                        <span class="item-price">$3.93</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="3.93" onchange="updatePrice(this)">
+                    </div>
+                    <div class="grocery-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="2.00">
+                        <span class="item-name">Other beverage</span>
+                        <span class="item-price">$2.00</span>
+                        <input type="number" class="price-input" step="0.01" min="0" value="2.00" onchange="updatePrice(this)">
+                    </div>
+                </section>
+
+                <section class="category miscellaneous-category" role="group" aria-labelledby="miscellaneous-heading">
+                    <h3 id="miscellaneous-heading">📝 Miscellaneous</h3>
+                    <div class="grocery-item custom-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="0.00">
+                        <input type="text" class="item-name-input" placeholder="Enter item name..." onclick="event.stopPropagation()" onchange="updateCustomItem(this)">
+                        <input type="number" class="custom-price-input" step="0.01" min="0" value="0.00" placeholder="$0.00" onclick="event.stopPropagation()" onchange="updateCustomPrice(this)">
+                    </div>
+                    <div class="grocery-item custom-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="0.00">
+                        <input type="text" class="item-name-input" placeholder="Enter item name..." onclick="event.stopPropagation()" onchange="updateCustomItem(this)">
+                        <input type="number" class="custom-price-input" step="0.01" min="0" value="0.00" placeholder="$0.00" onclick="event.stopPropagation()" onchange="updateCustomPrice(this)">
+                    </div>
+                    <div class="grocery-item custom-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="0.00">
+                        <input type="text" class="item-name-input" placeholder="Enter item name..." onclick="event.stopPropagation()" onchange="updateCustomItem(this)">
+                        <input type="number" class="custom-price-input" step="0.01" min="0" value="0.00" placeholder="$0.00" onclick="event.stopPropagation()" onchange="updateCustomPrice(this)">
+                    </div>
+                    <div class="grocery-item custom-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="0.00">
+                        <input type="text" class="item-name-input" placeholder="Enter item name..." onclick="event.stopPropagation()" onchange="updateCustomItem(this)">
+                        <input type="number" class="custom-price-input" step="0.01" min="0" value="0.00" placeholder="$0.00" onclick="event.stopPropagation()" onchange="updateCustomPrice(this)">
+                    </div>
+                    <div class="grocery-item custom-item" onclick="toggleItem(this)">
+                        <input type="checkbox" data-price="0.00">
+                        <input type="text" class="item-name-input" placeholder="Enter item name..." onclick="event.stopPropagation()" onchange="updateCustomItem(this)">
+                        <input type="number" class="custom-price-input" step="0.01" min="0" value="0.00" placeholder="$0.00" onclick="event.stopPropagation()" onchange="updateCustomPrice(this)">
+                    </div>
+                </section>
+            </div>
+            <div class="weekly-total">
+                <div>Estimated Weekly Cost: <strong>$96.49</strong></div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+                <div>Progress: <span id="week1-progress">0</span> items selected</div>
+            </div>
+        </main>
+
+        <!-- Week 2 -->
+        <main id="week2" class="week-content" role="tabpanel" aria-labelledby="tab-week2">
+            <h2 class="week-title">Week 2</h2>
+            <div class="grocery-grid" role="region" aria-label="Grocery categories">
+                <section class="category" role="group" aria-labelledby="protein-heading-2">
+                <h3 id="protein-heading-2">🥩 Proteins</h3>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="5.99">
+                    <span class="item-name">Chicken Breast (1 lb)</span>
+                    <span class="item-price">$5.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="5.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="7.49">
+                    <span class="item-name">Ground Turkey (1 lb)</span>
+                    <span class="item-price">$7.49</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="7.49" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="8.99">
+                    <span class="item-name">Salmon Fillet (1 lb)</span>
+                    <span class="item-price">$8.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="8.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="3.49">
+                    <span class="item-name">Eggs (dozen)</span>
+                    <span class="item-price">$3.49</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="3.49" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="4.99">
+                    <span class="item-name">Greek Yogurt (32 oz)</span>
+                    <span class="item-price">$4.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="4.99" onchange="updatePrice(this)">
+                </div>
+            </section>
+
+            <section class="category" role="group" aria-labelledby="vegetables-heading-2">
+                <h3 id="vegetables-heading-2">🥬 Vegetables & Fruits</h3>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="2.99">
+                    <span class="item-name">Spinach (5 oz bag)</span>
+                    <span class="item-price">$2.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="2.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="3.99">
+                    <span class="item-name">Bell Peppers (3 pack)</span>
+                    <span class="item-price">$3.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="3.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="4.49">
+                    <span class="item-name">Broccoli (2 lbs)</span>
+                    <span class="item-price">$4.49</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="4.49" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="5.99">
+                    <span class="item-name">Bananas (3 lbs)</span>
+                    <span class="item-price">$5.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="5.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="6.49">
+                    <span class="item-name">Apples (3 lbs)</span>
+                    <span class="item-price">$6.49</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="6.49" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="3.79">
+                    <span class="item-name">Carrots (2 lbs)</span>
+                    <span class="item-price">$3.79</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="3.79" onchange="updatePrice(this)">
+                </div>
+            </section>
+
+            <section class="category" role="group" aria-labelledby="dairy-heading-2">
+                <h3 id="dairy-heading-2">🥛 Dairy & Pantry</h3>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="3.29">
+                    <span class="item-name">Milk (1 gallon)</span>
+                    <span class="item-price">$3.29</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="3.29" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="4.99">
+                    <span class="item-name">Cheddar Cheese (8 oz)</span>
+                    <span class="item-price">$4.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="4.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="2.49">
+                    <span class="item-name">Whole Wheat Bread</span>
+                    <span class="item-price">$2.49</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="2.49" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="1.99">
+                    <span class="item-name">Brown Rice (2 lbs)</span>
+                    <span class="item-price">$1.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="1.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="3.99">
+                    <span class="item-name">Olive Oil (500ml)</span>
+                    <span class="item-price">$3.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="3.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="2.99">
+                    <span class="item-name">Quinoa (1 lb)</span>
+                    <span class="item-price">$2.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="2.99" onchange="updatePrice(this)">
+                </div>
+            </section>
+
+            <section class="category beverages-category" role="group" aria-labelledby="beverages-heading-2">
+                <h3 id="beverages-heading-2">🥤 Beverages</h3>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="4.99">
+                    <span class="item-name">Orange Juice (64 oz)</span>
+                    <span class="item-price">$4.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="4.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="5.99">
+                    <span class="item-name">Sparkling Water (24 pack)</span>
+                    <span class="item-price">$5.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="5.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="6.49">
+                    <span class="item-name">Soda (12 pack)</span>
+                    <span class="item-price">$6.49</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="6.49" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="2.99">
+                    <span class="item-name">Almond Milk (32 oz)</span>
+                    <span class="item-price">$2.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="2.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="1.99">
+                    <span class="item-name">Bottled Water (24 pack)</span>
+                    <span class="item-price">$1.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="1.99" onchange="updatePrice(this)">
+                </div>
+            </section>
+
+            <section class="category miscellaneous-category" role="group" aria-labelledby="miscellaneous-heading-2">
+                <h3 id="miscellaneous-heading-2">📝 Miscellaneous</h3>
+                <div class="grocery-item custom-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="0.00">
+                    <input type="text" class="item-name-input" placeholder="Enter item name..." onclick="event.stopPropagation()" onchange="updateCustomItem(this)">
+                    <input type="number" class="custom-price-input" step="0.01" min="0" value="0.00" placeholder="$0.00" onclick="event.stopPropagation()" onchange="updateCustomPrice(this)">
+                </div>
+                <div class="grocery-item custom-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="0.00">
+                    <input type="text" class="item-name-input" placeholder="Enter item name..." onclick="event.stopPropagation()" onchange="updateCustomItem(this)">
+                    <input type="number" class="custom-price-input" step="0.01" min="0" value="0.00" placeholder="$0.00" onclick="event.stopPropagation()" onchange="updateCustomPrice(this)">
+                </div>
+                <div class="grocery-item custom-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="0.00">
+                    <input type="text" class="item-name-input" placeholder="Enter item name..." onclick="event.stopPropagation()" onchange="updateCustomItem(this)">
+                    <input type="number" class="custom-price-input" step="0.01" min="0" value="0.00" placeholder="$0.00" onclick="event.stopPropagation()" onchange="updateCustomPrice(this)">
+                </div>
+                <div class="grocery-item custom-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="0.00">
+                    <input type="text" class="item-name-input" placeholder="Enter item name..." onclick="event.stopPropagation()" onchange="updateCustomItem(this)">
+                    <input type="number" class="custom-price-input" step="0.01" min="0" value="0.00" placeholder="$0.00" onclick="event.stopPropagation()" onchange="updateCustomPrice(this)">
+                </div>
+                <div class="grocery-item custom-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="0.00">
+                    <input type="text" class="item-name-input" placeholder="Enter item name..." onclick="event.stopPropagation()" onchange="updateCustomItem(this)">
+                    <input type="number" class="custom-price-input" step="0.01" min="0" value="0.00" placeholder="$0.00" onclick="event.stopPropagation()" onchange="updateCustomPrice(this)">
+                </div>
+            </section>
+            </div>
+            <div class="weekly-total">
+                <div>Estimated Weekly Cost: <strong>$98.99</strong></div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+                <div>Progress: <span id="week2-progress">0</span> items selected</div>
+            </div>
+        </main>
+
+        <!-- Week 3 -->
+        <main id="week3" class="week-content" role="tabpanel" aria-labelledby="tab-week3">
+            <h2 class="week-title">Week 3</h2>
+            <div class="grocery-grid" role="region" aria-label="Grocery categories">
+                <section class="category" role="group" aria-labelledby="protein-heading-3">
+                <h3 id="protein-heading-3">🥩 Proteins</h3>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="6.99">
+                    <span class="item-name">Pork Chops (1 lb)</span>
+                    <span class="item-price">$6.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="6.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="4.99">
+                    <span class="item-name">Ground Beef (1 lb)</span>
+                    <span class="item-price">$4.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="4.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="7.99">
+                    <span class="item-name">Tuna Steaks (1 lb)</span>
+                    <span class="item-price">$7.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="7.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="3.49">
+                    <span class="item-name">Eggs (dozen)</span>
+                    <span class="item-price">$3.49</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="3.49" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="5.49">
+                    <span class="item-name">Cottage Cheese (32 oz)</span>
+                    <span class="item-price">$5.49</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="5.49" onchange="updatePrice(this)">
+                </div>
+            </section>
+
+            <section class="category" role="group" aria-labelledby="vegetables-heading-3">
+                <h3 id="vegetables-heading-3">🥬 Vegetables & Fruits</h3>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="3.49">
+                    <span class="item-name">Kale (5 oz bag)</span>
+                    <span class="item-price">$3.49</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="3.49" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="2.99">
+                    <span class="item-name">Zucchini (2 lbs)</span>
+                    <span class="item-price">$2.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="2.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="4.99">
+                    <span class="item-name">Asparagus (1 lb)</span>
+                    <span class="item-price">$4.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="4.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="3.99">
+                    <span class="item-name">Strawberries (2 lbs)</span>
+                    <span class="item-price">$3.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="3.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="5.49">
+                    <span class="item-name">Oranges (3 lbs)</span>
+                    <span class="item-price">$5.49</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="5.49" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="2.79">
+                    <span class="item-name">Onions (3 lbs)</span>
+                    <span class="item-price">$2.79</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="2.79" onchange="updatePrice(this)">
+                </div>
+            </section>
+
+            <section class="category" role="group" aria-labelledby="dairy-heading-3">
+                <h3 id="dairy-heading-3">🥛 Dairy & Pantry</h3>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="3.29">
+                    <span class="item-name">Milk (1 gallon)</span>
+                    <span class="item-price">$3.29</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="3.29" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="6.99">
+                    <span class="item-name">Mozzarella Cheese (16 oz)</span>
+                    <span class="item-price">$6.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="6.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="2.79">
+                    <span class="item-name">Sourdough Bread</span>
+                    <span class="item-price">$2.79</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="2.79" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="3.49">
+                    <span class="item-name">Pasta (2 lbs)</span>
+                    <span class="item-price">$3.49</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="3.49" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="2.99">
+                    <span class="item-name">Coconut Oil (16 oz)</span>
+                    <span class="item-price">$2.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="2.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="4.99">
+                    <span class="item-name">Oats (42 oz)</span>
+                    <span class="item-price">$4.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="4.99" onchange="updatePrice(this)">
+                </div>
+            </section>
+
+            <section class="category beverages-category" role="group" aria-labelledby="beverages-heading-3">
+                <h3 id="beverages-heading-3">🥤 Beverages</h3>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="3.99">
+                    <span class="item-name">Apple Juice (64 oz)</span>
+                    <span class="item-price">$3.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="3.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="4.49">
+                    <span class="item-name">Coconut Water (12 pack)</span>
+                    <span class="item-price">$4.49</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="4.49" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="5.99">
+                    <span class="item-name">Energy Drinks (4 pack)</span>
+                    <span class="item-price">$5.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="5.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="3.49">
+                    <span class="item-name">Oat Milk (32 oz)</span>
+                    <span class="item-price">$3.49</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="3.49" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="2.29">
+                    <span class="item-name">Sports Drinks (8 pack)</span>
+                    <span class="item-price">$2.29</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="2.29" onchange="updatePrice(this)">
+                </div>
+            </section>
+
+            <section class="category miscellaneous-category" role="group" aria-labelledby="miscellaneous-heading-3">
+                <h3 id="miscellaneous-heading-3">📝 Miscellaneous</h3>
+                <div class="grocery-item custom-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="0.00">
+                    <input type="text" class="item-name-input" placeholder="Enter item name..." onclick="event.stopPropagation()" onchange="updateCustomItem(this)">
+                    <input type="number" class="custom-price-input" step="0.01" min="0" value="0.00" placeholder="$0.00" onclick="event.stopPropagation()" onchange="updateCustomPrice(this)">
+                </div>
+                <div class="grocery-item custom-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="0.00">
+                    <input type="text" class="item-name-input" placeholder="Enter item name..." onclick="event.stopPropagation()" onchange="updateCustomItem(this)">
+                    <input type="number" class="custom-price-input" step="0.01" min="0" value="0.00" placeholder="$0.00" onclick="event.stopPropagation()" onchange="updateCustomPrice(this)">
+                </div>
+                <div class="grocery-item custom-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="0.00">
+                    <input type="text" class="item-name-input" placeholder="Enter item name..." onclick="event.stopPropagation()" onchange="updateCustomItem(this)">
+                    <input type="number" class="custom-price-input" step="0.01" min="0" value="0.00" placeholder="$0.00" onclick="event.stopPropagation()" onchange="updateCustomPrice(this)">
+                </div>
+                <div class="grocery-item custom-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="0.00">
+                    <input type="text" class="item-name-input" placeholder="Enter item name..." onclick="event.stopPropagation()" onchange="updateCustomItem(this)">
+                    <input type="number" class="custom-price-input" step="0.01" min="0" value="0.00" placeholder="$0.00" onclick="event.stopPropagation()" onchange="updateCustomPrice(this)">
+                </div>
+                <div class="grocery-item custom-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="0.00">
+                    <input type="text" class="item-name-input" placeholder="Enter item name..." onclick="event.stopPropagation()" onchange="updateCustomItem(this)">
+                    <input type="number" class="custom-price-input" step="0.01" min="0" value="0.00" placeholder="$0.00" onclick="event.stopPropagation()" onchange="updateCustomPrice(this)">
+                </div>
+            </section>
+            </div>
+            
+            <div class="weekly-total">
+                <div>Estimated Weekly Cost: <strong>$95.60</strong></div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+                <div>Progress: <span id="week3-progress">0</span> items selected</div>
+            </div>
+        </main>
+
+        <!-- Week 4 -->
+        <main class="week-content" id="week4" role="tabpanel" aria-labelledby="tab-week4">
+            <h2 class="week-title">Week 4</h2>
+            <div class="grocery-grid" role="region" aria-label="Grocery categories">
+                <section class="category" role="group" aria-labelledby="protein-heading-4">
+                <h3 id="protein-heading-4">🥩 Proteins</h3>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="8.49">
+                    <span class="item-name">Ribeye Steak (1 lb)</span>
+                    <span class="item-price">$8.49</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="8.49" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="5.99">
+                    <span class="item-name">Chicken Thighs (2 lbs)</span>
+                    <span class="item-price">$5.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="5.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="9.99">
+                    <span class="item-name">Shrimp (1 lb)</span>
+                    <span class="item-price">$9.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="9.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="3.49">
+                    <span class="item-name">Eggs (dozen)</span>
+                    <span class="item-price">$3.49</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="3.49" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="6.99">
+                    <span class="item-name">Protein Powder (2 lbs)</span>
+                    <span class="item-price">$6.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="6.99" onchange="updatePrice(this)">
+                </div>
+            </section>
+
+            <section class="category" role="group" aria-labelledby="vegetables-heading-4">
+                <h3 id="vegetables-heading-4">🥬 Vegetables & Fruits</h3>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="4.99">
+                    <span class="item-name">Mixed Greens (10 oz)</span>
+                    <span class="item-price">$4.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="4.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="3.49">
+                    <span class="item-name">Sweet Potatoes (3 lbs)</span>
+                    <span class="item-price">$3.49</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="3.49" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="5.99">
+                    <span class="item-name">Brussels Sprouts (2 lbs)</span>
+                    <span class="item-price">$5.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="5.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="6.99">
+                    <span class="item-name">Blueberries (2 lbs)</span>
+                    <span class="item-price">$6.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="6.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="4.49">
+                    <span class="item-name">Pears (3 lbs)</span>
+                    <span class="item-price">$4.49</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="4.49" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="2.99">
+                    <span class="item-name">Garlic (1 lb)</span>
+                    <span class="item-price">$2.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="2.99" onchange="updatePrice(this)">
+                </div>
+            </section>
+
+            <section class="category" role="group" aria-labelledby="dairy-heading-4">
+                <h3 id="dairy-heading-4">🥛 Dairy & Pantry</h3>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="3.29">
+                    <span class="item-name">Milk (1 gallon)</span>
+                    <span class="item-price">$3.29</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="3.29" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="7.99">
+                    <span class="item-name">Parmesan Cheese (8 oz)</span>
+                    <span class="item-price">$7.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="7.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="3.99">
+                    <span class="item-name">Bagels (6 pack)</span>
+                    <span class="item-price">$3.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="3.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="2.99">
+                    <span class="item-name">Lentils (2 lbs)</span>
+                    <span class="item-price">$2.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="2.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="4.49">
+                    <span class="item-name">Avocado Oil (16 oz)</span>
+                    <span class="item-price">$4.49</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="4.49" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="5.99">
+                    <span class="item-name">Nuts & Seeds Mix (2 lbs)</span>
+                    <span class="item-price">$5.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="5.99" onchange="updatePrice(this)">
+                </div>
+            </section>
+
+            <section class="category beverages-category" role="group" aria-labelledby="beverages-heading-4">
+                <h3 id="beverages-heading-4">🥤 Beverages</h3>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="5.49">
+                    <span class="item-name">Cranberry Juice (64 oz)</span>
+                    <span class="item-price">$5.49</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="5.49" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="6.99">
+                    <span class="item-name">Kombucha (4 pack)</span>
+                    <span class="item-price">$6.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="6.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="4.99">
+                    <span class="item-name">Iced Tea (12 pack)</span>
+                    <span class="item-price">$4.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="4.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="3.99">
+                    <span class="item-name">Soy Milk (32 oz)</span>
+                    <span class="item-price">$3.99</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="3.99" onchange="updatePrice(this)">
+                </div>
+                <div class="grocery-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="3.49">
+                    <span class="item-name">Electrolyte Water (12 pack)</span>
+                    <span class="item-price">$3.49</span>
+                    <input type="number" class="price-input" step="0.01" min="0" value="3.49" onchange="updatePrice(this)">
+                </div>
+            </section>
+
+            <section class="category miscellaneous-category" role="group" aria-labelledby="miscellaneous-heading-4">
+                <h3 id="miscellaneous-heading-4">📝 Miscellaneous</h3>
+                <div class="grocery-item custom-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="0.00">
+                    <input type="text" class="item-name-input" placeholder="Enter item name..." onclick="event.stopPropagation()" onchange="updateCustomItem(this)">
+                    <input type="number" class="custom-price-input" step="0.01" min="0" value="0.00" placeholder="$0.00" onclick="event.stopPropagation()" onchange="updateCustomPrice(this)">
+                </div>
+                <div class="grocery-item custom-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="0.00">
+                    <input type="text" class="item-name-input" placeholder="Enter item name..." onclick="event.stopPropagation()" onchange="updateCustomItem(this)">
+                    <input type="number" class="custom-price-input" step="0.01" min="0" value="0.00" placeholder="$0.00" onclick="event.stopPropagation()" onchange="updateCustomPrice(this)">
+                </div>
+                <div class="grocery-item custom-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="0.00">
+                    <input type="text" class="item-name-input" placeholder="Enter item name..." onclick="event.stopPropagation()" onchange="updateCustomItem(this)">
+                    <input type="number" class="custom-price-input" step="0.01" min="0" value="0.00" placeholder="$0.00" onclick="event.stopPropagation()" onchange="updateCustomPrice(this)">
+                </div>
+                <div class="grocery-item custom-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="0.00">
+                    <input type="text" class="item-name-input" placeholder="Enter item name..." onclick="event.stopPropagation()" onchange="updateCustomItem(this)">
+                    <input type="number" class="custom-price-input" step="0.01" min="0" value="0.00" placeholder="$0.00" onclick="event.stopPropagation()" onchange="updateCustomPrice(this)">
+                </div>
+                <div class="grocery-item custom-item" onclick="toggleItem(this)">
+                    <input type="checkbox" data-price="0.00">
+                    <input type="text" class="item-name-input" placeholder="Enter item name..." onclick="event.stopPropagation()" onchange="updateCustomItem(this)">
+                    <input type="number" class="custom-price-input" step="0.01" min="0" value="0.00" placeholder="$0.00" onclick="event.stopPropagation()" onchange="updateCustomPrice(this)">
+                </div>
+            </section>
+            </div>
+            
+            <div class="weekly-total">
+                <div>Estimated Weekly Cost: <strong>$98.96</strong></div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+                <div>Progress: <span id="week4-progress">0</span> items selected</div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const weekBudgets = {
+            1: 96.49,
+            2: 98.99,
+            3: 95.60,
+            4: 98.96
+        };
+
+        let currentWeek = 1;
+        let editMode = false;
+
+        function showWeek(weekNum) {
+            // Hide all week contents
+            document.querySelectorAll('.week-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class and aria-selected from all buttons
+            document.querySelectorAll('.week-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-selected', 'false');
+            });
+            
+            // Show selected week
+            document.getElementById(`week${weekNum}`).classList.add('active');
+            const activeBtn = document.querySelectorAll('.week-btn')[weekNum - 1];
+            activeBtn.classList.add('active');
+            activeBtn.setAttribute('aria-selected', 'true');
+            
+            currentWeek = weekNum;
+            
+            // Update budget display
+            document.getElementById('weeklyBudget').textContent = `$${weekBudgets[weekNum].toFixed(2)}`;
+            
+            // Recalculate selected total for current week
+            updateSelectedTotal();
+            updateProgress();
+        }
+
+        function toggleItem(item) {
+            const checkbox = item.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+            
+            if (checkbox.checked) {
+                item.classList.add('checked');
+            } else {
+                item.classList.remove('checked');
+            }
+            
+            updateSelectedTotal();
+            updateProgress();
+        }
+
+        function toggleItemCheckbox(checkbox) {
+            const item = checkbox.closest('.grocery-item');
+            
+            if (checkbox.checked) {
+                item.classList.add('checked');
+            } else {
+                item.classList.remove('checked');
+            }
+            
+            updateSelectedTotal();
+            updateProgress();
+        }
+
+        function updateSelectedTotal() {
+            const activeWeek = document.querySelector('.week-content.active');
+            const checkedItems = activeWeek.querySelectorAll('input[type="checkbox"]:checked');
+            
+            let total = 0;
+            checkedItems.forEach(checkbox => {
+                total += parseFloat(checkbox.getAttribute('data-price'));
+            });
+            
+            document.getElementById('selectedTotal').textContent = `$${total.toFixed(2)}`;
+        }
+
+        function updateProgress() {
+            const activeWeek = document.querySelector('.week-content.active');
+            const allItems = activeWeek.querySelectorAll('input[type="checkbox"]');
+            const checkedItems = activeWeek.querySelectorAll('input[type="checkbox"]:checked');
+            
+            const progressPercent = (checkedItems.length / allItems.length) * 100;
+            const progressBar = activeWeek.querySelector('.progress-fill');
+            const progressText = activeWeek.querySelector(`#week${currentWeek}-progress`);
+            
+            progressBar.style.width = `${progressPercent}%`;
+            progressText.textContent = checkedItems.length;
+        }
+
+        function printSelectedItems() {
+            // Mark the current active week for printing
+            document.querySelectorAll('.week-content').forEach(content => {
+                content.classList.remove('print-active');
+            });
+            
+            const activeWeek = document.querySelector('.week-content.active');
+            if (activeWeek) {
+                activeWeek.classList.add('print-active');
+            }
+            
+            // Check if there are any selected items
+            const checkedItems = activeWeek.querySelectorAll('input[type="checkbox"]:checked');
+            
+            if (checkedItems.length === 0) {
+                alert('Please select some items before printing.');
+                return;
+            }
+            
+            // Trigger the print dialog
+            window.print();
+        }
+
+        function toggleEditMode() {
+            editMode = !editMode;
+            const editBtn = document.getElementById('editBtn');
+            const container = document.querySelector('.container');
+            
+            if (editMode) {
+                container.classList.add('edit-mode');
+                editBtn.textContent = '💾 Save Prices';
+                editBtn.classList.add('editing');
+            } else {
+                container.classList.remove('edit-mode');
+                editBtn.textContent = '✏️ Edit Prices';
+                editBtn.classList.remove('editing');
+                saveAllPrices();
+            }
+        }
+
+        function updatePrice(input) {
+            const newPrice = parseFloat(input.value);
+            if (isNaN(newPrice) || newPrice < 0) {
+                alert('Please enter a valid price.');
+                return;
+            }
+            
+            const groceryItem = input.closest('.grocery-item');
+            const checkbox = groceryItem.querySelector('input[type="checkbox"]');
+            const priceDisplay = groceryItem.querySelector('.item-price');
+            
+            // Update the data attribute and display
+            checkbox.setAttribute('data-price', newPrice.toFixed(2));
+            priceDisplay.textContent = `$${newPrice.toFixed(2)}`;
+            
+            // Update totals
+            updateSelectedTotal();
+            updateWeeklyBudget();
+        }
+
+        function saveAllPrices() {
+            // Get all price inputs and sync with displays
+            document.querySelectorAll('.price-input').forEach(input => {
+                updatePrice(input);
+            });
+            
+            // Show confirmation
+            const editBtn = document.getElementById('editBtn');
+            const originalText = editBtn.textContent;
+            editBtn.textContent = '✅ Saved!';
+            setTimeout(() => {
+                editBtn.textContent = originalText;
+            }, 2000);
+        }
+
+        function updateWeeklyBudget() {
+            const activeWeek = document.querySelector('.week-content.active');
+            const allItems = activeWeek.querySelectorAll('input[type="checkbox"]');
+            
+            let total = 0;
+            allItems.forEach(checkbox => {
+                total += parseFloat(checkbox.getAttribute('data-price'));
+            });
+            
+            // Update the weekly budget for current week
+            weekBudgets[currentWeek] = total;
+            document.getElementById('weeklyBudget').textContent = `$${total.toFixed(2)}`;
+            
+            // Update the weekly total display
+            const weeklyTotalElement = activeWeek.querySelector('.weekly-total strong');
+            if (weeklyTotalElement) {
+                weeklyTotalElement.textContent = `$${total.toFixed(2)}`;
+            }
+        }
+
+        // Keyboard navigation support
+        document.addEventListener('keydown', function(e) {
+            // Arrow key navigation for week tabs
+            if (e.target.classList.contains('week-btn')) {
+                const tabs = Array.from(document.querySelectorAll('.week-btn'));
+                const currentIndex = tabs.indexOf(e.target);
+                let newIndex = currentIndex;
+                
+                if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    newIndex = currentIndex > 0 ? currentIndex - 1 : tabs.length - 1;
+                    e.preventDefault();
+                } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    newIndex = currentIndex < tabs.length - 1 ? currentIndex + 1 : 0;
+                    e.preventDefault();
+                } else if (e.key === 'Home') {
+                    newIndex = 0;
+                    e.preventDefault();
+                } else if (e.key === 'End') {
+                    newIndex = tabs.length - 1;
+                    e.preventDefault();
+                }
+                
+                if (newIndex !== currentIndex) {
+                    tabs[newIndex].focus();
+                    tabs[newIndex].click();
+                }
+            }
+            
+            // Escape key to exit edit mode
+            if (e.key === 'Escape' && editMode) {
+                toggleEditMode();
+            }
+        });
+
+        function updateCustomItem(input) {
+            // Update the item name for custom items
+            const groceryItem = input.closest('.grocery-item');
+            const checkbox = groceryItem.querySelector('input[type="checkbox"]');
+            
+            // Save the custom item name in a data attribute
+            checkbox.setAttribute('data-item-name', input.value);
+        }
+
+        function updateCustomPrice(input) {
+            const newPrice = parseFloat(input.value);
+            if (isNaN(newPrice) || newPrice < 0) {
+                input.value = '0.00';
+                return;
+            }
+            
+            const groceryItem = input.closest('.grocery-item');
+            const checkbox = groceryItem.querySelector('input[type="checkbox"]');
+            
+            // Update the data attribute
+            checkbox.setAttribute('data-price', newPrice.toFixed(2));
+            
+            // Update totals if item is checked
+            if (checkbox.checked) {
+                updateSelectedTotal();
+            }
+            updateWeeklyBudget();
+        }
+
+        // Skip link functionality
+        function skipToContent() {
+            document.getElementById('week1').focus();
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            showWeek(1);
+            
+            // Add skip link
+            const skipLink = document.createElement('a');
+            skipLink.href = '#week1';
+            skipLink.textContent = 'Skip to main content';
+            skipLink.className = 'skip-link';
+            skipLink.onclick = skipToContent;
+            document.body.insertBefore(skipLink, document.body.firstChild);
+        });
+    </script>
+</body>
+</html>
+
