@@ -2,6 +2,10 @@
 
 An interactive 4-week grocery planning application designed to help you organize your weekly shopping with price tracking and progress monitoring.
 
+## 🚀 Live Demo
+
+**Try it now**: [https://joefabre.github.io/seattle-grocery-list/](https://joefabre.github.io/seattle-grocery-list/)
+
 ## 🌟 Features
 
 - **4-Week Planning**: Organize grocery lists for 4 different weeks
